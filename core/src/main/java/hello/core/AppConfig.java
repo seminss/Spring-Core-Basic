@@ -9,24 +9,31 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class AppConfig {
     //MemberServiceImpl을 만들고, 내가 만든 MemberServiceImpl은 MemoryMemberRepository를 사용할거야
+    @Bean
     public MemberService memberService(){
 
         return new MemberServiceImpl(memberRepository());
     }
 
     //MemoryMemberRepository와 FixDiscountPolicy를 넣고 계산한 객체를 반환한다.
+    @Bean
     public OrderService orderService(){
         return new OrderServiceImpl(
             memberRepository(), discountPolicy());
     }
 
+    @Bean
     public MemberRepository memberRepository(){
         return new MemoryMemberRepository();
     }
 
+    @Bean
     public DiscountPolicy discountPolicy(){
 //        return new FixDiscountPolicy();
         return new RateDiscountPolicy();
