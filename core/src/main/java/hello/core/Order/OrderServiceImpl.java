@@ -5,7 +5,10 @@ import hello.core.discount.DiscountPolicy;
 //import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
@@ -16,6 +19,7 @@ public class OrderServiceImpl implements OrderService{
         return memberRepository;
     }
 
+    @Autowired
     //MemorymemberRepository와 FixdiscountPolicy라는 의존관게가 주입이 된다.
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
